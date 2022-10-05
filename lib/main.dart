@@ -1,11 +1,10 @@
 import 'package:date_time_picker/date_time_picker.dart';
-import 'package:flutter/foundation.dart';
+//import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart';
 import 'dart:async';
 import 'package:light/light.dart';
-import 'package:torch_light/torch_light.dart';
 import 'package:audioplayers/audioplayers.dart';
 
 void main() => runApp(MyApp());
@@ -167,7 +166,7 @@ class _MyHomePageState extends State<MyHomePage> {
             _countdown();
           },
           tooltip: 'Alarm',
-          child: const Icon(Icons.alarm_add),
+          child: const Icon(Icons.alarm_on_sharp),
         ),
       ),
     );

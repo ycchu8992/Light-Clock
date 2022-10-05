@@ -39,6 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String _valueChanged4 = '';
   String _valueToValidate4 = '';
   String _valueSaved4 = '';
+  String _currentTime = '';
   String _luxString = 'Unknown';
   String clk = '';
   late Light _light;
@@ -96,10 +97,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _countdown() {
     audioPlayer.setSourceAsset("Radar.mp3");
-    Timer.periodic(const Duration(seconds: 2), (timer) {
+    new Timer.periodic(const Duration(seconds: 1), (timer) {
       String lsHour = TimeOfDay.now().hour.toString().padLeft(2, '0');
       String lsMinute = TimeOfDay.now().minute.toString().padLeft(2, '0');
+      String lsSecond = DateTime.now().second.toString().padLeft(2, '0');
       _controller4 = TextEditingController(text: '$lsHour:$lsMinute');
+      setState(() {
+        _currentTime = '$lsHour:$lsMinute:$lsSecond';
+      });
       if ('$lsHour:$lsMinute' == _valueSaved4) {
         wakeup = 1;
         audioPlayer.setReleaseMode(ReleaseMode.loop);
@@ -151,6 +156,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Text('Submit'),
                 ),
                 Text('Lux value: $_luxString\n'),
+                Text('Alarm: $_valueSaved4\n'),
+                Text("Now:" + _currentTime),
               ],
             ),
           ),

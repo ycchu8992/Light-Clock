@@ -44,10 +44,17 @@ class _MyHomePageState extends State<MyHomePage> {
   late Light _light;
   late StreamSubscription _subscription;
   var wakeup = 0;
+  Color bgColor = Color.fromRGBO(125, 125, 125, 125);
   bool sign = true;
   AudioPlayer audioPlayer = AudioPlayer();
 
   void onData(int luxValue) async {
+    Color bgColor_temp;
+    if (luxValue <= 150) {
+      bgColor_temp = Color.fromRGBO(125, 125, 125, 25);
+    } else {
+      bgColor_temp = Color.fromRGBO(255, 255, 255, 2);
+    }
     if (luxValue >= 100) {
       //await TorchLight.disableTorch();
       await audioPlayer.release();
@@ -55,6 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }
     setState(() {
       _luxString = "$luxValue";
+      bgColor = bgColor_temp;
     });
   }
 
@@ -123,7 +131,9 @@ class _MyHomePageState extends State<MyHomePage> {
       home: Scaffold(
         appBar: AppBar(
           title: Text('Light Clock'),
+          centerTitle: true,
         ),
+        backgroundColor: bgColor,
         body: SingleChildScrollView(
           padding: EdgeInsets.only(left: 20, right: 20, top: 50),
           child: Form(
